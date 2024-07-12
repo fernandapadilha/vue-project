@@ -1,7 +1,21 @@
 <script setup>
 import { ref, computed, defineProps } from 'vue';
 
-const props = defineProps(['title']);
+//const props = defineProps(['title', 'content']);
+const props = defineProps({
+    title: {
+        type: String,
+        required:true
+    },
+    content: {
+        type: String,
+        default: "Meu valor default de texto para conteúdo."
+    },
+    qtde: {
+        type: Number,
+        default: 1
+    }
+})
 const showContent = ref(false);
 const textBotao = computed(
     () => showContent.value ? 'Esconder' : 'Mostrar'
@@ -15,7 +29,8 @@ const textBotao = computed(
         <button @click="showContent = !showContent">{{ textBotao }}</button>
         <div v-if="showContent" class="expand-box">
             <h1>{{ props.title }}</h1>
-            <p>Texto da caixa</p>
+            <p>{{ props.content }}</p>
+            <p>Quantidade: {{ props.qtde }}</p>
         </div>
     </div>
 
